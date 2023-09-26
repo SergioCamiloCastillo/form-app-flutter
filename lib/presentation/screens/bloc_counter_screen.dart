@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CubitCounterScreen extends StatelessWidget {
-  const CubitCounterScreen({super.key});
+class BlocCounterScreen extends StatelessWidget {
+  const BlocCounterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cubit contador'),
+        title: Text('Bloc contador'),
         actions: [
           IconButton(onPressed: () {}, icon: Icon(Icons.refresh_rounded))
         ],
