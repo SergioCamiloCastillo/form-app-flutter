@@ -3,7 +3,7 @@ part of 'counter_bloc.dart';
 class CounterState extends Equatable {
   final int counter;
   final int transactionCounter;
-  const CounterState({this.counter = 10, this.transactionCounter = 0});
+  const CounterState({this.counter = 0, this.transactionCounter = 0});
   CounterState copyWith({int? counter, int? transactionCounter}) =>
       CounterState(
           counter: counter ?? this.counter,
