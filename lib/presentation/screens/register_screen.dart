@@ -56,6 +56,7 @@ class _RegisterForm extends StatelessWidget {
     final registerCubit = context.watch<RegisterCubit>();
     final username = registerCubit.state.username;
     final password = registerCubit.state.password;
+    final email = registerCubit.state.email;
 
     return Form(
         child: Column(
@@ -63,8 +64,7 @@ class _RegisterForm extends StatelessWidget {
         CustomTextFormField(
           label: "Nombre de usuario",
           onChanged: (value) => registerCubit.usernameChanged(value),
-          errorMessage:
-              username.isPure || username.isValid ? null : "Usuario no valido",
+          errorMessage: username.errorMessage,
           validator: (value) {
             if (value == null || value.isEmpty) return "Campo requerio";
             if (value.trim().isEmpty) return "Campo requerio";
@@ -80,30 +80,16 @@ class _RegisterForm extends StatelessWidget {
           onChanged: (value) {
             registerCubit.emailChanged(value);
           },
-          validator: (value) {
-            if (value == null || value.isEmpty) return "Campo requerio";
-            if (value.trim().isEmpty) return "Campo requerio";
-            final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-            if (!emailRegExp.hasMatch(value)) return "No es correo";
-            return null;
-          },
+          errorMessage: email.errorMessage,
         ),
         const SizedBox(
           height: 20,
         ),
         CustomTextFormField(
-          label: "Contraseña",
-          obscureText: true,
-          onChanged: (value) => registerCubit.passwordChanged(value),
-          errorMessage:
-              password.isPure || password.isValid ? null : "Contraseña no valida",
-          validator: (value) {
-            if (value == null || value.isEmpty) return "Campo requerio";
-            if (value.trim().isEmpty) return "Campo requerio";
-            if (value.length < 6) return "Debe contener mas de 6 letras";
-            return null;
-          },
-        ),
+            label: "Contraseña ${password.value}",
+            obscureText: true,
+            onChanged: (value) => registerCubit.passwordChanged(value),
+            errorMessage: password.errorMessage),
         const SizedBox(
           height: 20,
         ),
